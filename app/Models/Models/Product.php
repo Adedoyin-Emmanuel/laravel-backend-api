@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["product_name", "product_description", "product_price", "product_image"];
+    protected $fillable = ["product_name", "product_description", "product_price", "product_image", "product_type", "product_size", "product_height", "product_width", "product_length", "product_weight"];
     protected $table = "products_table";
 
     public static function delete_product($id)

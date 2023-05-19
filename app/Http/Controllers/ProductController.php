@@ -13,19 +13,25 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'product_name' => 'required',
-            'product_description' => 'required',
             'product_price' => 'required|numeric',
-            'product_image' => 'required|image',
+            'product_weight' => 'numeric',
+            'product_size' => 'numeric',
+            'product_height' => 'numeric',
+            'product_width' => 'numeric',
+            'product_type' => 'required',
+            'product_length' => 'numeric'
         ]);
 
-        $imagePath = $validatedData['product_image']->store('public/images');
-        $imageUrl = url(Storage::url($imagePath));
 
         $product = Product::create([
             'product_name' => $validatedData['product_name'],
-            'product_description' => $validatedData['product_description'],
             'product_price' => $validatedData['product_price'],
-            'product_image' => $imageUrl,
+            'product_width' => $validatedData['product_width'],
+            'product_height' => $validatedData['product_height'],
+            'product_length' => $validatedData['product_length'],
+            'product_weight' => $validatedData['product_weight'],
+            'product_size' => $validatedData['product_size'],
+            'product_type' => $validatedData['product_type']
         ]);
 
         return response()->json(['message' => 'Product created successfully', 'data' => $product], 201);

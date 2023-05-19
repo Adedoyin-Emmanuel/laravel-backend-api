@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Models\Product;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -14,29 +12,18 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'product_name' => 'required',
             'product_price' => 'required|numeric',
-            'product_weight' => 'numeric',
-            'product_size' => 'numeric',
-            'product_height' => 'numeric',
-            'product_width' => 'numeric',
             'product_type' => 'required',
-            'product_length' => 'numeric'
+            'product_size' => '',
+            'product_height' => '',
+            'product_width' => '',
+            'product_length' => '',
+            'product_weight' => ''
         ]);
 
-
-        $product = Product::create([
-            'product_name' => $validatedData['product_name'],
-            'product_price' => $validatedData['product_price'],
-            'product_width' => $validatedData['product_width'],
-            'product_height' => $validatedData['product_height'],
-            'product_length' => $validatedData['product_length'],
-            'product_weight' => $validatedData['product_weight'],
-            'product_size' => $validatedData['product_size'],
-            'product_type' => $validatedData['product_type']
-        ]);
+        $product = Product::create($validatedData);
 
         return response()->json(['message' => 'Product created successfully', 'data' => $product], 201);
     }
-
 
     public function delete($id)
     {
